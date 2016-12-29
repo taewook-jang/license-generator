@@ -8,11 +8,11 @@
 
 dependencies {
 
-	//___compile___
+    //___ compile ___
 
     // AxBoot
     compile 'com.chequer.axboot:ax-boot-framework:2.1.1'
-    compile 'com.chequer.axboot:ax-boot-core:2.1.20'
+    compile 'com.chequer.axboot:ax-boot-core:2.1.27'
 
     // spring boot
     compile 'org.springframework.boot:spring-boot-starter-web'
@@ -25,14 +25,22 @@ dependencies {
     compile 'com.querydsl:querydsl-apt:4.1.4'
     compile 'org.mariadb.jdbc:mariadb-java-client:1.5.5'
 
-    //___compileOnly___
-    compileOnly 'org.projectlombok:lombok:1.16.10'
+
+    //___ compileOnly ___
+    compileOnly 'org.projectlombok:lombok'
     compileOnly 'org.apache.tomcat.embed:tomcat-embed-jasper'
 
     //compileOnly 'javax.servlet:javax.servlet-api'
 
 
-    //___testCompile___
+    //___ testCompile ___
     testCompile 'org.springframework.boot:spring-boot-starter-test'
 
+
+    //___ runtime ___
+    runtime 'org.springframework.boot:spring-boot-devtools'
+
 }
+
+
+

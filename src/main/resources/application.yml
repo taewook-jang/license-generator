@@ -1,0 +1,110 @@
+#debug: true
+
+server.port: 8080
+
+# Active Profiles :: [local|dev|test|stage|prod]
+spring:
+  profiles.active: local
+
+  # IDENTITY
+  application.name: AXBoot
+
+  http:
+    # Multipart
+    multipart:
+      enabled: true
+      file-size-threshold: 0
+      max-file-size: 8192Mb
+      max-request-size: 8192Mb
+
+    # HTTP Encoding
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+  # Spring MVC
+  mvc:
+    date-format: 'yyyy-MM-dd HH:mm:ss'
+    dispatch-trace-request: true
+    dispatch-options-request: true
+    favicon.enabled: false
+    ignore-default-model-on-redirect: true
+    locale: ko_KR
+    throw-exception-if-no-handler-found: false
+
+  # JMX
+  jmx.enabled: false
+
+  # H2
+  #h2.console.enabled: true
+  #h2.console.path: /h2-console
+
+# Security
+security.basic.enabled: false
+
+# AXBoot
+axboot:
+  # Package Information
+  basePackageName: io.dat
+  controllerPackageName: io.dat.controllers
+  domainPackageName: io.dat.domain
+  name: dream-ant axboot
+  # DataSource
+  dataSource:
+    driverClassName: org.mariadb.jdbc.Driver
+    initialSize: 5
+    maxIdle: -1
+    maxTotal: 10
+    maxWaitMillis: 3000
+    slowQueryThreshold: 3000
+    hibernate.hbm2ddlAuto: none
+    hibernate.databaseType: mysql
+  # File Upload
+  upload.repository: /Workspace/tempDir
+  # Log
+  log:
+    level: ERROR
+    slack:
+      enabled: false
+      webHookUrl:
+      channel: error_logs
+    database.enabled: true
+    adminUrl:
+
+--- # Profile -------------------- :: local :: --------------------
+spring:
+  profiles: local
+
+# AXBoot
+axboot:
+  # DataSource
+  dataSource:
+    url: jdbc:mariadb://localhost:3306/axboot
+    username: root
+    password: ParkSt0re!
+
+
+# Logging
+logging.config: classpath:logback-local.xml
+
+
+--- # Profile -------------------- :: dev :: --------------------
+spring:
+  profiles: dev
+
+
+--- # Profile -------------------- :: test :: --------------------
+spring:
+  profiles: test
+
+--- # Profile -------------------- :: prod :: --------------------
+spring:
+  profiles: prod
+
+# Server port
+server.port: 80
+
+# Logging
+logging.config: /var/log/logback.xml
+

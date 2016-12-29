@@ -4,15 +4,12 @@
 
     <include resource="org/springframework/boot/logging/logback/base.xml" />
 
-    <!-- Logstash Appender -->
-    <!--<appender name="SLACK" class="com.dat.parkstore.support.slack.SlackLogbackAppender"/>-->
-
     <!-- ALL > TRACE > DEBUG > INFO > WARN > ERROR > OFF -->
     <root level="WARN">
         <appender-ref ref="CONSOLE" />
     </root>
 
-    <logger name="io.dat" level="DEBUG"/>
+    <logger name="com.dat.parkstore" level="DEBUG"/>
 
     <!-- Framework Category -->
     <logger name="org.apache" level="WARN" />
