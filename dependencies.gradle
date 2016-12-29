@@ -1,0 +1,38 @@
+/*
+ ##################################################
+ #
+ # [ parkstore-app-server ] gradle project config
+ #
+ ##################################################
+ */
+
+dependencies {
+
+	//___compile___
+
+    // AxBoot
+    compile 'com.chequer.axboot:ax-boot-framework:2.1.1'
+    compile 'com.chequer.axboot:ax-boot-core:2.1.20'
+
+    // spring boot
+    compile 'org.springframework.boot:spring-boot-starter-web'
+    compile 'org.springframework.boot:spring-boot-starter-security'
+
+    // servlet
+    compile 'javax.servlet:jstl'
+
+    // jpa & jdbc :: querydsl, mariadb
+    compile 'com.querydsl:querydsl-apt:4.1.4'
+    compile 'org.mariadb.jdbc:mariadb-java-client:1.5.5'
+
+    //___compileOnly___
+    compileOnly 'org.projectlombok:lombok:1.16.10'
+    compileOnly 'org.apache.tomcat.embed:tomcat-embed-jasper'
+
+    //compileOnly 'javax.servlet:javax.servlet-api'
+
+
+    //___testCompile___
+    testCompile 'org.springframework.boot:spring-boot-starter-test'
+
+}

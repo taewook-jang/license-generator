@@ -1,0 +1,60 @@
+buildscript {
+	ext {
+		springBootVersion = SPRING_BOOT_VERSION
+	}
+	repositories {
+		maven { url 'http://repo.spring.io/plugins-release' }
+		maven { url "https://plugins.gradle.org/m2/" }
+		maven { url "http://nexus.axboot.com/content/repositories/releases" }
+		maven {
+			url "${NEXUS_URL}/content/groups/public/"
+			credentials {
+				username NEXUS_ID
+				password NEXUS_PASSWORD
+			}
+		}
+		mavenCentral()
+		jcenter()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${SPRING_BOOT_VERSION}")
+		classpath "gradle.plugin.com.boxfuse.client:flyway-release:4.0.3"
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'groovy'
+apply plugin: 'spring-boot'
+apply plugin: 'idea'
+apply plugin: "org.flywaydb.flyway"
+
+/* _____ base config _____ */
+apply from: 'config-base.gradle'
+
+/* _____ querydsl config _____ */
+apply from: 'config-querydsl.gradle'
+
+/* _____ dependencies config _____ */
+apply from: 'dependencies.gradle'
+
+jar {
+	baseName = 'dream-ant-axboot'
+	version = '0.0.1-SNAPSHOT'
+}
+
+
+/*dependencies {
+	compile('org.springframework.boot:spring-boot-starter-jdbc')
+	compile('org.mybatis.spring.boot:mybatis-spring-boot-starter:1.1.1')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compileOnly('org.projectlombok:lombok')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+}*/
+
+/* _____ config :: flyway for local test _____ */
+flyway {
+	url = 'jdbc:mariadb://localhost:3306/axboot'
+	user = 'root'
+	password = 'ParkSt0re!'
+	locations = ["filesystem:${projectDir}/src/test/resources/db/migration"]
+}
