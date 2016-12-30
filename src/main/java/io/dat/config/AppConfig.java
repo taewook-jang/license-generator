@@ -35,7 +35,7 @@ import javax.sql.DataSource;
 @EnableTransactionManagement(proxyTargetClass = true, mode = AdviceMode.PROXY)
 @EnableJpaRepositories(basePackages = GlobalConstants.DOMAIN_PACKAGE)
 @EnableAspectJAutoProxy(proxyTargetClass = true)
-public class CoreApplicationContext {
+public class AppConfig {
 
     @Bean
     @Primary

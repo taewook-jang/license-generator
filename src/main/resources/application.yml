@@ -1,6 +1,6 @@
 #debug: true
 
-server.port: 8080
+server.port: 9090
 
 # Active Profiles :: [local|dev|test|stage|prod]
 spring:

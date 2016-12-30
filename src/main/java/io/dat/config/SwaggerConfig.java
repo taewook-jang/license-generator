@@ -14,7 +14,7 @@ import javax.inject.Inject;
 
 @Configuration
 @EnableSwagger
-public class AXBootSwaggerConfig {
+public class SwaggerConfig {
     @Inject
     private SpringSwaggerConfig springSwaggerConfig;
 

@@ -51,7 +51,7 @@ import java.util.List;
 import java.util.Locale;
 
 @Configuration
-public class AXBootWebMvcConfigurerAdapter extends WebMvcConfigurerAdapter implements ApplicationContextAware {
+public class WebMvcConfig extends WebMvcConfigurerAdapter implements ApplicationContextAware {
     private ApplicationContext applicationContext;
 
     @Override

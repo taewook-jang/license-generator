@@ -27,10 +27,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
+@Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(securedEnabled = true, proxyTargetClass = true)
-@Configuration
-public class AXBootSecurityConfig extends WebSecurityConfigurerAdapter {
+//@EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String LOGIN_API = "/api/login";
     public static final String LOGOUT_API = "/api/logout";
@@ -64,7 +65,7 @@ public class AXBootSecurityConfig extends WebSecurityConfigurerAdapter {
     private AXBootTokenAuthenticationService tokenAuthenticationService;
 
 
-    public AXBootSecurityConfig() {
+    public SecurityConfig() {
         super(true);
     }
 
@@ -76,31 +77,31 @@ public class AXBootSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .anonymous()
-                .and()
+            .anonymous()
+            .and()
 
-                .authorizeRequests()
-                .anyRequest()
-                .hasRole(ROLE)
-                .antMatchers(HttpMethod.POST, LOGIN_API).permitAll()
-                .antMatchers(LOGIN_PAGE).permitAll()
-                .and()
+            .authorizeRequests()
+            .anyRequest()
+            .hasRole(ROLE)
+            .antMatchers(HttpMethod.POST, LOGIN_API).permitAll()
+            .antMatchers(LOGIN_PAGE).permitAll()
+            .and()
 
-                .formLogin().loginPage(LOGIN_PAGE).permitAll()
-                .and()
+            .formLogin().loginPage(LOGIN_PAGE).permitAll()
+            .and()
 
-                .logout()
-                .logoutUrl(LOGOUT_API)
-                .deleteCookies(GlobalConstants.ADMIN_AUTH_TOKEN_KEY, GlobalConstants.LAST_NAVIGATED_PAGE)
-                .logoutSuccessHandler(new LogoutSuccessHandler(LOGIN_PAGE))
-                .and()
+            .logout()
+            .logoutUrl(LOGOUT_API)
+            .deleteCookies(GlobalConstants.ADMIN_AUTH_TOKEN_KEY, GlobalConstants.LAST_NAVIGATED_PAGE)
+            .logoutSuccessHandler(new LogoutSuccessHandler(LOGIN_PAGE))
+            .and()
 
-                .exceptionHandling().authenticationEntryPoint(new AXBootAuthenticationEntryPoint())
-                .and()
+            .exceptionHandling().authenticationEntryPoint(new AXBootAuthenticationEntryPoint())
+            .and()
 
-                .addFilterBefore(new AXBootLoginFilter(LOGIN_API, tokenAuthenticationService, userService, authenticationManager(), new AXBootAuthenticationEntryPoint()), UsernamePasswordAuthenticationFilter.class)
-                .addFilterBefore(new AXBootAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class)
-                .addFilterAfter(new AXBootLogbackMdcFilter(), UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(new AXBootLoginFilter(LOGIN_API, tokenAuthenticationService, userService, authenticationManager(), new AXBootAuthenticationEntryPoint()), UsernamePasswordAuthenticationFilter.class)
+            .addFilterBefore(new AXBootAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class)
+            .addFilterAfter(new AXBootLogbackMdcFilter(), UsernamePasswordAuthenticationFilter.class);
 
     }
 

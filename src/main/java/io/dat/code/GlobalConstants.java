@@ -1,14 +1,14 @@
 package io.dat.code;
 
-public class GlobalConstants {
+public interface GlobalConstants {
 
-    public static final String DOMAIN_PACKAGE = "io.dat.domain";
+    String DOMAIN_PACKAGE = "io.dat.domain";
 
-    public static final String LAST_NAVIGATED_PAGE = "a_x_b_l_n_p";
+    String LAST_NAVIGATED_PAGE = "a_x_b_l_n_p";
 
-    public static final String ADMIN_AUTH_TOKEN_KEY = "ed897f61-2f45-4187-a84e-9ae7787cb8ca";
+    String ADMIN_AUTH_TOKEN_KEY = "e155070d-d078-43d1-81d7-7363712ce20b";
 
-    public static final String LANGUAGE_COOKIE_KEY = "a_x_lang";
+    String LANGUAGE_COOKIE_KEY = "a_x_lang";
 
-    public static final String LANGUAGE_PARAMETER_KEY = "language";
+    String LANGUAGE_PARAMETER_KEY = "language";
 }

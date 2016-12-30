@@ -3,7 +3,7 @@ package io.dat.config.security;
 import com.chequer.axboot.core.api.response.ApiResponse;
 import com.chequer.axboot.core.code.ApiStatus;
 import com.chequer.axboot.core.utils.*;
-import io.dat.config.AXBootSecurityConfig;
+import io.dat.config.SecurityConfig;
 import io.dat.code.GlobalConstants;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
@@ -26,7 +26,7 @@ public class AXBootAuthenticationEntryPoint extends BasicAuthenticationEntryPoin
         if (authException instanceof BadCredentialsException) {
             apiResponse = ApiResponse.error(ApiStatus.SYSTEM_ERROR, "계정정보를 확인하세요");
         } else {
-            apiResponse = ApiResponse.redirect(ContextUtil.getPagePath(AXBootSecurityConfig.LOGIN_PAGE));
+            apiResponse = ApiResponse.redirect(ContextUtil.getPagePath(SecurityConfig.LOGIN_PAGE));
         }
 
         if (requestUtils.isAjax()) {
@@ -34,7 +34,7 @@ public class AXBootAuthenticationEntryPoint extends BasicAuthenticationEntryPoin
             response.getWriter().write(JsonUtils.toJson(apiResponse));
             response.getWriter().flush();
         } else {
-            response.sendRedirect(ContextUtil.getPagePath(AXBootSecurityConfig.LOGIN_PAGE));
+            response.sendRedirect(ContextUtil.getPagePath(SecurityConfig.LOGIN_PAGE));
         }
     }
 }

@@ -5,7 +5,7 @@ import com.chequer.axboot.core.utils.ContextUtil;
 import com.chequer.axboot.core.utils.HttpUtils;
 import com.chequer.axboot.core.utils.JsonUtils;
 import com.chequer.axboot.core.utils.RequestUtils;
-import io.dat.config.AXBootSecurityConfig;
+import io.dat.config.SecurityConfig;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.GenericFilterBean;
@@ -45,7 +45,7 @@ public class AXBootAuthenticationFilter extends GenericFilterBean {
                 response.getWriter().write(JsonUtils.toJson(apiResponse));
                 response.getWriter().flush();
             } else {
-                response.sendRedirect(ContextUtil.getPagePath(AXBootSecurityConfig.ACCESS_DENIED_PAGE));
+                response.sendRedirect(ContextUtil.getPagePath(SecurityConfig.ACCESS_DENIED_PAGE));
             }
         }
     }

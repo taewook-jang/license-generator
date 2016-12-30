@@ -38,7 +38,7 @@ dependencies {
 
 
     //___ runtime ___
-    runtime 'org.springframework.boot:spring-boot-devtools'
+    //runtime 'org.springframework.boot:spring-boot-devtools'
 
 }
 
