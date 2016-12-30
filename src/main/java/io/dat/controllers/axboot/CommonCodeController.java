@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/api/v1/commonCodes")
+@RequestMapping("/api/v1/commonCodes")
 public class CommonCodeController extends BaseController {
 
     @Inject

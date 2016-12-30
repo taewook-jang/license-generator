@@ -27,8 +27,6 @@ public class ChildSampleService extends BaseService<ChildSample, String> {
 
     @Transactional
     public void deleteByKeys(List<String> keys) {
-        for (String key : keys) {
-            delete(key);
-        }
+        keys.forEach(this::delete);
     }
 }

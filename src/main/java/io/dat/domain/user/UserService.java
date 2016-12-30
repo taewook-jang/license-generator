@@ -73,7 +73,7 @@ public class UserService extends BaseService<User, String> {
         return user;
     }
 
-    private void doSaveJob(User user) throws Exception {
+    private void doSaveJob(User user) {
 
         delete(qUserRole).where(qUserRole.userCd.eq(user.getUserCd())).execute();
         delete(qUserAuth).where(qUserAuth.userCd.eq(user.getUserCd())).execute();
@@ -83,7 +83,7 @@ public class UserService extends BaseService<User, String> {
         doSaveUserAuthAndRole(user);
     }
 
-    private void doSaveUserAuthAndRole(User user) throws Exception {
+    private void doSaveUserAuthAndRole(User user) {
 
         for (UserAuth userAuth : user.getAuthList()) {
             userAuth.setUserCd(user.getUserCd());

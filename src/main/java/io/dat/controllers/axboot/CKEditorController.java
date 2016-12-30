@@ -7,6 +7,7 @@ import io.dat.domain.file.CommonFileService;
 import io.dat.domain.file.UploadParameters;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,7 +23,7 @@ public class CKEditorController extends BaseController {
     @Inject
     private CommonFileService commonFileService;
 
-    @RequestMapping(value = "/uploadImage", method = RequestMethod.POST, produces = APPLICATION_JSON)
+    @PostMapping(value = "/uploadImage", produces = APPLICATION_JSON)
     public CKEditorUploadResponse uploadDragAndDropFromCKEditor(
             @RequestParam(value = "upload") MultipartFile multipartFile,
             @RequestParam(defaultValue = "CKEDITOR", required = false) String targetType,
@@ -48,7 +49,7 @@ public class CKEditorController extends BaseController {
         return ckEditorUploadResponse;
     }
 
-    @RequestMapping(value = "/fileBrowser")
+    @RequestMapping("/fileBrowser")
     public String fileBrowser() {
         return "/common/fileBrowser";
     }
