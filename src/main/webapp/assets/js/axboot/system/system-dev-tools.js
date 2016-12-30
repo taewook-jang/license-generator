@@ -275,7 +275,7 @@ fnObj.tabView = axboot.viewExtend({
     frameTarget: null,
     limitCount: 10,
     list: [
-        {menuId: "00-swagger", id: "swagger", progNm: 'Swagger', menuNm: 'Swagger', progPh: '/swagger/index.html', url: '/swagger/index.html', status: "on", fixed: true},
+        {menuId: "00-swagger", id: "swagger", progNm: 'Swagger', menuNm: 'Swagger', progPh: '/swagger/index.html_', url: '/swagger/index.html_', status: "on", fixed: true},
         {menuId: "01-H2Console", id: "H2-Console", progNm: 'H2-Console', name: 'H2-Console', menuNm: 'H2-Console', progPh: '/h2-console', url: '/h2-console'},
         {menuId: "02-ModelExtractor", id: "ModelExtractor", progNm: 'ModelExtractor', name: 'ModelExtractor', menuNm: 'ModelExtractor', progPh: '/modelExtractor/db', url: '/modelExtractor/db'}
     ],

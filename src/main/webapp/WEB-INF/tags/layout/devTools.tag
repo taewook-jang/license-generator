@@ -24,10 +24,10 @@
         var CONTEXT_PATH = "<%=ContextUtil.getContext()%>";
         var TOP_MENU_DATA = [
             {
-                menuId: "00-swagger", id: "swagger", progNm: 'Swagger', name: 'Swagger', menuNm: 'Swagger', progPh: '/swagger/index.html', url: '/swagger/index.html', program: {
+                menuId: "00-swagger", id: "swagger", progNm: 'Swagger', name: 'Swagger', menuNm: 'Swagger', progPh: '/swagger/index.html_', url: '/swagger/index.html_', program: {
                 progCd: "Swagger",
                 progNm: "Swagger",
-                progPh: "/swagger/index.html"
+                progPh: "/swagger/index.html_"
             }
             },
             {

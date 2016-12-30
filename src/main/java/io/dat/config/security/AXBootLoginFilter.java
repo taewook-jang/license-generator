@@ -28,13 +28,19 @@ public class AXBootLoginFilter extends AbstractAuthenticationProcessingFilter {
     private final AXBootAuthenticationEntryPoint adminAuthenticationEntryPoint;
     private final UserService userService;
 
-    public AXBootLoginFilter(String urlMapping, AXBootTokenAuthenticationService adminTokenAuthenticationService, UserService userService, AuthenticationManager authenticationManager, AXBootAuthenticationEntryPoint adminAuthenticationEntryPoint) {
+    public AXBootLoginFilter(String urlMapping,
+                 AXBootTokenAuthenticationService adminTokenAuthenticationService,
+                 UserService userService,
+                 AuthenticationManager authenticationManager,
+                 AXBootAuthenticationEntryPoint adminAuthenticationEntryPoint) {
+
         super(new AntPathRequestMatcher(urlMapping));
 
         this.adminTokenAuthenticationService = adminTokenAuthenticationService;
         this.userService = userService;
         this.adminAuthenticationEntryPoint = adminAuthenticationEntryPoint;
         this.setAuthenticationFailureHandler(new LoginFailureHandler());
+
         setAuthenticationManager(authenticationManager);
     }
 

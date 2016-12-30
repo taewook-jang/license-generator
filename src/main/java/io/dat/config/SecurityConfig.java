@@ -35,7 +35,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     public static final String LOGIN_API = "/api/login";
     public static final String LOGOUT_API = "/api/logout";
-    public static final String LOGIN_PAGE = "/jsp/login.jsp";
+    public static final String LOGIN_PAGE = "/login";
+    //public static final String LOGIN_PAGE = "/jsp/login.jsp";
     public static final String ACCESS_DENIED_PAGE = "/jsp/common/not-authorized.jsp?errorCode=401";
     public static final String ROLE = "ASP_ACCESS";
 
@@ -78,27 +79,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .anonymous()
-            .and()
-
+                .and()
             .authorizeRequests()
-            .anyRequest()
-            .hasRole(ROLE)
-            .antMatchers(HttpMethod.POST, LOGIN_API).permitAll()
-            .antMatchers(LOGIN_PAGE).permitAll()
-            .and()
-
-            .formLogin().loginPage(LOGIN_PAGE).permitAll()
-            .and()
-
+                .anyRequest()
+                .hasRole(ROLE)
+                .antMatchers(HttpMethod.POST, LOGIN_API).permitAll()
+                .antMatchers(LOGIN_PAGE).permitAll()
+                .and()
+            .formLogin()
+                .loginPage(LOGIN_PAGE)
+                .permitAll()
+                .and()
             .logout()
-            .logoutUrl(LOGOUT_API)
-            .deleteCookies(GlobalConstants.ADMIN_AUTH_TOKEN_KEY, GlobalConstants.LAST_NAVIGATED_PAGE)
-            .logoutSuccessHandler(new LogoutSuccessHandler(LOGIN_PAGE))
-            .and()
-
-            .exceptionHandling().authenticationEntryPoint(new AXBootAuthenticationEntryPoint())
-            .and()
-
+                .logoutUrl(LOGOUT_API)
+                .deleteCookies(GlobalConstants.ADMIN_AUTH_TOKEN_KEY, GlobalConstants.LAST_NAVIGATED_PAGE)
+                .logoutSuccessHandler(new LogoutSuccessHandler(LOGIN_PAGE))
+                .and()
+            .exceptionHandling()
+                .authenticationEntryPoint(new AXBootAuthenticationEntryPoint())
+                .and()
             .addFilterBefore(new AXBootLoginFilter(LOGIN_API, tokenAuthenticationService, userService, authenticationManager(), new AXBootAuthenticationEntryPoint()), UsernamePasswordAuthenticationFilter.class)
             .addFilterBefore(new AXBootAuthenticationFilter(tokenAuthenticationService), UsernamePasswordAuthenticationFilter.class)
             .addFilterAfter(new AXBootLogbackMdcFilter(), UsernamePasswordAuthenticationFilter.class);
