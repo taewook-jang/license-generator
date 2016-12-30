@@ -38,6 +38,66 @@ public class UserService extends BaseService<User, String> {
     }
 
     @Transactional
+    public void saveUser(List<User> users) {
+
+        if (isNotEmpty(users)) {
+            users.stream()
+                 .map(user -> updateUserEntity(user))
+                 .forEach(user -> {
+                    try {
+                        doSaveJob(user);
+                    } catch (Exception e) {
+                        throw new RuntimeException(e.getMessage());
+                    }
+                 });
+        }
+    }
+
+    public User updateUserEntity(User user) {
+
+        String password = bCryptPasswordEncoder.encode(user.getUserPs());
+        User originalUser = userRepository.findOne(user.getUserCd());
+
+        if (originalUser != null) {
+            if (isNotEmpty(user.getUserPs())) {
+                user.setPasswordUpdateDate(Instant.now(Clock.systemUTC()));
+                user.setUserPs(password);
+            } else {
+                user.setUserPs(originalUser.getUserPs());
+            }
+        } else {
+            user.setPasswordUpdateDate(Instant.now(Clock.systemUTC()));
+            user.setUserPs(password);
+        }
+
+        return user;
+    }
+
+    private void doSaveJob(User user) throws Exception {
+
+        delete(qUserRole).where(qUserRole.userCd.eq(user.getUserCd())).execute();
+        delete(qUserAuth).where(qUserAuth.userCd.eq(user.getUserCd())).execute();
+
+        save(user);
+
+        doSaveUserAuthAndRole(user);
+    }
+
+    private void doSaveUserAuthAndRole(User user) throws Exception {
+
+        for (UserAuth userAuth : user.getAuthList()) {
+            userAuth.setUserCd(user.getUserCd());
+        }
+
+        for (UserRole userRole : user.getRoleList()) {
+            userRole.setUserCd(user.getUserCd());
+        }
+
+        userAuthService.save(user.getAuthList());
+        userRoleService.save(user.getRoleList());
+    }
+
+    /*@Transactional
     public void saveUser(List<User> users) throws Exception {
         if (isNotEmpty(users)) {
             for (User user : users) {
@@ -73,7 +133,7 @@ public class UserService extends BaseService<User, String> {
                 userRoleService.save(user.getRoleList());
             }
         }
-    }
+    }*/
 
     public User getUser(RequestParams requestParams) {
         User user = get(requestParams).stream().findAny().orElse(null);

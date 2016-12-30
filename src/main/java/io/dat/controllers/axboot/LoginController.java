@@ -31,10 +31,8 @@ public class LoginController {
         initialized = databaseInitService.initialized();
     }
 
-    @GetMapping("/login")
+    @GetMapping({"/", "/login"})
     public String login() {
-
-        log.info("login...");
 
         String nextPage = "/login";
 
