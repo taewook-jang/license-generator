@@ -71,7 +71,7 @@
                             onError: function(err){
                                 axDialog.alert({
                                     title: '로그인 실패',
-                                    theme: "danger",
+                                    theme: "default",
                                     msg: err.message
                                 });
                             }

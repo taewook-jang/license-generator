@@ -53,8 +53,6 @@ var CODE = {};
 // fnObj 기본 함수 스타트와 리사이즈
 fnObj.pageStart = function () {
 
-    alert('page start');
-
     this.pageButtonView.initView();
     this.searchView.initView();
     this.gridView01.initView();
@@ -139,6 +137,9 @@ fnObj.gridView01 = axboot.viewExtend(axboot.gridView, {
     initView: function () {
         var _this = this;
         this.target = axboot.gridBuilder({
+
+            showLineNumber: false,
+
             showRowSelector: true,
             frozenColumnIndex: 0,
             sortable: true,
