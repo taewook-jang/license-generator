@@ -34,6 +34,10 @@
                 background-size: cover;
                 color: #ccc;
             }
+
+            .ax5-ui-dialog .ax-dialog-body .ax-dialog-msg {
+                color: black;
+            }
         </style>
     </jsp:attribute>
 
@@ -41,16 +45,16 @@
         <script>
             axboot.requireSession('${config.sessionCookie}');
         </script>
-        <script type="text/javascript" src="<c:url value='/assets/js/axboot/dist/good-words.js' />"></script>
+        <%--<script type="text/javascript" src="<c:url value='/assets/js/axboot/dist/good-words.js' />"></script>--%>
     </jsp:attribute>
 
     <jsp:attribute name="script">
         <script type="text/javascript">
-            var fnObj = {
-                pageStart: function () {
 
+            var fnObj = {
+                /*pageStart: function () {
                     $("#good_words").html(goodWords.get());
-                },
+                },*/
                 login: function () {
                     axboot.ajax({
                         method: "POST",
@@ -60,21 +64,17 @@
                             "userPs": $("#userPs").val()
                         }),
                         callback: function (res) {
-                            if (res && res.error) {
-                                if (res.error.message == "Unauthorized") {
-                                    alert("로그인에 실패 하였습니다. 계정정보를 확인하세요");
-                                }
-                                else {
-                                    alert(res.error.message);
-                                }
-                                return;
-                            }
-                            else {
-                                location.reload();
-                            }
+                           location.reload();
                         },
                         options: {
-                            nomask: false, apiType: "login"
+                            nomask: false, apiType: "login",
+                            onError: function(err){
+                                axDialog.alert({
+                                    title: '로그인 실패',
+                                    theme: "danger",
+                                    msg: err.message
+                                });
+                            }
                         }
                     });
                     return false;

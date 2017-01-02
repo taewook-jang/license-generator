@@ -36,9 +36,11 @@ public class AXBootAuthenticationEntryPoint extends BasicAuthenticationEntryPoin
             response.setContentType(HttpUtils.getJsonContentType(request));
             response.getWriter().write(JsonUtils.toJson(apiResponse));
             response.getWriter().flush();
+
         } else {
             response.sendRedirect(ContextUtil.getPagePath(SecurityConfig.LOGIN_PAGE));
         }
+
     }
 }
 

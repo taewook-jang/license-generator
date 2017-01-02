@@ -22,9 +22,9 @@ public class CommonCodeService extends BaseService<CommonCode, CommonCodeId> {
     }
 
     public List<CommonCode> get(RequestParams requestParams) {
+
         String groupCd = requestParams.getString("groupCd", "");
         String useYn = requestParams.getString("useYn", "");
-
         String filter = requestParams.getString("filter");
 
         BooleanBuilder builder = new BooleanBuilder();
