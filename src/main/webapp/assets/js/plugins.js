@@ -29516,13 +29516,22 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
     };
 
     var statusUpdate = function statusUpdate() {
-        var fromRowIndex = this.xvar.paintStartRowIndex;
-        var toRowIndex = this.xvar.paintStartRowIndex + this.xvar.paintRowCount - 1;
-        //var totalElements = (this.page && this.page.totalElements) ? this.page.totalElements : this.xvar.dataRowCount;
-        var totalElements = this.xvar.dataRowCount;
+
+        //console.log(this.page);
+
+        var fromRowIndex = this.page.currentPage * this.page.pageSize;
+        var toRowIndex = fromRowIndex + this.page.pageSize;
+        var totalElements = (this.page && this.page.totalElements) ? this.page.totalElements : this.xvar.dataRowCount;
+
+        //var fromRowIndex = this.xvar.paintStartRowIndex;
+        //var toRowIndex = this.xvar.paintStartRowIndex + this.xvar.paintRowCount - 1;
+        //var totalElements = this.xvar.dataRowCount;
         if (toRowIndex > totalElements) {
             toRowIndex = totalElements;
         }
+
+        //console.log("toRowIndex: " + toRowIndex);
+        //console.log("this.xvar.dataRealRowCount: " + this.xvar.dataRealRowCount);
 
         this.$["page"]["status"].html(GRID.tmpl.get("page_status", {
             fromRowIndex: U.number(fromRowIndex + 1, { "money": true }),
